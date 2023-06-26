@@ -1,7 +1,8 @@
 import "./App.css";
 import codenamesApi from "../../utils/api";
 import { useEffect, useState } from "react";
-import CardList from "../CardList/CardList";
+import React from "react";
+import CardList from "../CardList/CardList.tsx";
 
 function App() {
   const [cards, setCards] = useState(null);

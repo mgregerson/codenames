@@ -8,18 +8,26 @@ import { Button } from "react-bootstrap";
  * Handles user interactions, such as card selection.
  */
 
-function Card(props) {
-  const { word, team } = props;
-  console.log(team, "TEAM in CARD");
-  const [selected, setIsSelected] = useState(false);
+interface CardProps {
+  word: string;
+  team: string;
+}
 
-  const handleClick = () => {
-    setIsSelected(!selected);
+function Card(props: CardProps) {
+  const { word, team } = props;
+  const [selected, setSelected] = useState<boolean>(false);
+
+  const handleClick = (): void => {
+    if (!selected) {
+      setSelected(true);
+    }
   };
 
   return (
     <div className={`Card ${selected ? "selected" : ""}`}>
-      <Button variant={team}>{word.toUpperCase()}</Button>
+      <Button variant={team} disabled={selected} onClick={handleClick}>
+        {word.toUpperCase()}
+      </Button>
     </div>
   );
 }
