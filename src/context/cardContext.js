@@ -21,6 +21,18 @@ export function CardProvider({ children }) {
     getCards();
   }, []); // Empty dependency array ensures the effect runs only once
 
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("cards");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return <CardContext.Provider value={cards}>{children}</CardContext.Provider>;
 }
 
