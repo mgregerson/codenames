@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { CardProps } from "../../types/types";
 
 /**
  * Card component.
@@ -8,11 +9,6 @@ import { Button } from "react-bootstrap";
  * Handles user interactions, such as card selection.
  */
 
-interface CardProps {
-  word: string;
-  team: string;
-}
-
 function Card(props: CardProps) {
   const { word, team } = props;
   const [selected, setSelected] = useState<boolean>(false);
@@ -20,6 +16,7 @@ function Card(props: CardProps) {
   const handleClick = (): void => {
     if (!selected) {
       setSelected(true);
+      props.handleGuess(word, team);
     }
   };
 

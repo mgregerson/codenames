@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { SocketContext } from "../../context/socketContext";
+import { PlayerRegistrationData } from "../../types/types";
+
 /** TeamSelect Component
  *  This component is used to select a team - red or blue.
  *
@@ -12,12 +14,6 @@ import { SocketContext } from "../../context/socketContext";
  *        - team - the team that is currently selected
  *        - role - The role of the user - spymaster or player
  */
-
-type PlayerRegistrationData = {
-  playerName: string;
-  team: string;
-  role: string;
-};
 
 interface PlayerRegistrationProps {
   handlePlayerRegistration: Function;

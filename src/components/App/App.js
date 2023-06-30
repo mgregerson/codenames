@@ -4,20 +4,24 @@ import React from "react";
 import CardList from "../CardList/CardList.tsx";
 import { useCardContext } from "../../context/cardContext";
 import { SocketContext } from "../../context/socketContext";
-import TeamSelect from "../PlayerRegistration/PlayerRegistration";
+import GameContainer from "../GameContainer/GameContainer";
 import PlayerRegistration from "../PlayerRegistration/PlayerRegistration";
+import StartGame from "../StartGame/StartGame";
+import { set } from "react-hook-form";
 
 function App() {
   const cards = useCardContext();
   const socket = useContext(SocketContext);
-  const [player, setPlayer] = useState({});
+  const [player, setPlayer] = useState(null);
   const [players, setPlayers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [guesses, setGuesses] = useState([]);
+  const [currTeam, setCurrTeam] = useState(null);
 
   console.log("THE PLAYER IN APP IS", player);
   console.log("THE PLAYERS IN APP IS", players);
   console.log("THE TEAMS IN APP IS", teams);
+  console.log("THE GUESSES IN APP IS", guesses);
 
   useEffect(() => {
     // Handle player joining event
@@ -38,9 +42,17 @@ function App() {
     });
 
     // Handle guess made event
-    socket.on("guessMade", (guess) => {
-      setGuesses((prevGuesses) => [...prevGuesses, guess]);
+    socket.on("guessMade", (updatedCards) => {
+      setGuesses(updatedCards);
     });
+
+    socket.on("startGame", () => {
+      console.log("game started");
+    });
+
+    if (socket) {
+      handleJoinGame();
+    }
 
     // Cleanup socket connection on unmount
     return () => {
@@ -48,10 +60,10 @@ function App() {
     };
   }, [socket]);
 
-  const handleJoinGame = () => {
+  function handleJoinGame() {
     // Emit join event to the server
-    socket.emit("join", player);
-  };
+    socket.emit("join", socket.id);
+  }
 
   function handlePlayerRegistration(data) {
     setPlayer(data);
@@ -62,20 +74,38 @@ function App() {
     console.log(data);
   }
 
+  function startGame() {
+    // Emit start game event to the server
+    socket.emit("startGame");
+    setCurrTeam("blue");
+  }
+
   const handleTeamSelect = (team, role, name) => {
     // Emit joinTeam event to the server
     socket.emit("joinTeam", team, role, name);
   };
 
-  const handleMakeGuess = (guess) => {
+  const handleGuess = (word, team) => {
     // Emit makeGuess event to the server
-    socket.emit("makeGuess", guess);
+    socket.emit("makeGuess", word, team, cards);
   };
 
   return (
     <div className="App">
-      <PlayerRegistration handlePlayerRegistration={handlePlayerRegistration} />
-      {cards && <CardList cards={cards} />}
+      {player === null ? (
+        <PlayerRegistration
+          handlePlayerRegistration={handlePlayerRegistration}
+        />
+      ) : (
+        <GameContainer
+          player={player}
+          cards={cards}
+          guesses={guesses}
+          handleGuess={handleGuess}
+          teams={teams}
+          startGame={startGame}
+        />
+      )}
     </div>
   );
 }

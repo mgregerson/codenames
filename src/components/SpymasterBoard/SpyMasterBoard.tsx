@@ -1,15 +1,6 @@
 import React from "react";
 import "./SpyMasterBoard.css";
-
-interface SpymasterBoardProps {
-  cards: { [key: number]: WordData };
-}
-
-interface WordData {
-  word: string;
-  team: "red" | "blue" | "neutral" | "death";
-  guess: string;
-}
+import { SpymasterBoardProps } from "../../types/types";
 
 function SpymasterBoard({ cards }: SpymasterBoardProps) {
   const renderBoard = () => {
@@ -23,15 +14,9 @@ function SpymasterBoard({ cards }: SpymasterBoardProps) {
         colorClass = "gray";
       } else if (card.team === "death") {
         colorClass = "black";
-      } else {
-        colorClass = "gray"; // Default to gray for unknown team
       }
 
-      return (
-        <div key={index} className={`card ${colorClass}`}>
-          {/* Display the word or any other content */}
-        </div>
-      );
+      return <div key={index} className={`card ${colorClass}`}></div>;
     });
   };
 

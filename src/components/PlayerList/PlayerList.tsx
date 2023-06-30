@@ -1,5 +1,5 @@
 import React from "react";
-
+import { PlayerListProps } from "../../types/types";
 /** PlayerList Component
  *
  * Props: redTeam - array of players on the red team {team, role, name, id}
@@ -7,11 +7,6 @@ import React from "react";
  *
  *
  */
-
-interface PlayerListProps {
-  redTeam: Array<{ team: string; role: string; name: string; id: string }>;
-  blueTeam: Array<{ team: string; role: string; name: string; id: string }>;
-}
 
 function PlayerList({ redTeam, blueTeam }: PlayerListProps) {
   return (

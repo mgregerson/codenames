@@ -1,25 +1,21 @@
 import Card from "../Card/Card";
 import "./CardList.css";
 import React from "react";
+import { CardListProps, CardType } from "../../types/types";
 
-/**  */
-
-interface Card {
-  word: string;
-  team: string;
-}
-
-interface CardListProps {
-  cards: Card[];
-}
-
-function CardList(cards: CardListProps) {
+function CardList(props: CardListProps) {
   return (
     <div className="CardList w-1/2 mx-auto">
       <div className="grid grid-cols-5 gap-4">
-        {cards &&
-          cards.cards.map((card: Card) => (
-            <Card key={card.word} team={card.team} word={card.word} />
+        {props.cards &&
+          props.cards.map((card: CardType) => (
+            <Card
+              key={card.word}
+              team={card.team}
+              word={card.word}
+              guess={card.guess}
+              handleGuess={props.handleGuess}
+            />
           ))}
       </div>
     </div>
