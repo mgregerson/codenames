@@ -4,6 +4,8 @@
   grid-gap: 10px;
   width: 250px;
   height: 250px;
+  margin: 0 auto;
+  padding: 5px;
 }
 
 .card {
@@ -19,17 +21,17 @@
 }
 
 .red {
-  background-color: red;
+  background-color: red !important;
 }
 
 .blue {
-  background-color: blue;
+  background-color: blue !important;
 }
 
 .gray {
-  background-color: gray;
+  background-color: gray !important;
 }
 
 .black {
-  background-color: black;
+  background-color: black !important;
 }
