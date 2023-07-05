@@ -2,6 +2,7 @@ export interface CardType {
   word: string;
   team: "red" | "blue" | "neutral" | "death";
   guess: "red" | "blue" | "neutral" | "";
+  selected: boolean;
 }
 
 export interface Player {
@@ -17,9 +18,15 @@ export interface TeamPlayer {
   id: string;
 }
 
+export interface Team {
+  players: TeamPlayer[];
+  score: boolean;
+}
+
+// includes players[] and score, a boolean
 export interface Teams {
-  redTeam: TeamPlayer[];
-  blueTeam: TeamPlayer[];
+  red: Team;
+  blue: Team;
 }
 
 export interface SpymasterBoardProps {
@@ -36,13 +43,13 @@ export interface CardProps {
   word: string;
   team: string;
   guess: string;
-  handleGuess: Function;
+  currTeam: "red" | "blue";
 }
 
 export interface CardListProps {
   cards: Cards;
   guesses: Guesses;
-  handleGuess: Function;
+  currTeam: "red" | "blue";
 }
 
 export interface PlayerListProps {
@@ -55,14 +62,15 @@ export interface GameContainerProps {
   cards: Cards;
   guesses: Guesses;
   teams: Teams;
-  handleGuess: Function;
   startGame: () => void;
+  currTeam: "red" | "blue";
 }
 
 interface Guess {
   word: string;
   team: string;
   guess: string;
+  selected: boolean;
 }
 
 export type Guesses = Guess[];
