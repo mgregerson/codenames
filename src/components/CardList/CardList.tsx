@@ -14,7 +14,7 @@ function CardList(props: CardListProps) {
               team={card.team}
               word={card.word}
               guess={card.guess}
-              handleGuess={props.handleGuess}
+              currTeam={props.currTeam}
             />
           ))}
       </div>

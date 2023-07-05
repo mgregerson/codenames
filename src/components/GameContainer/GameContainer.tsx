@@ -9,19 +9,19 @@ const GameContainer: React.FC<GameContainerProps> = ({
   player,
   cards,
   guesses,
-  handleGuess,
   teams,
   startGame,
+  currTeam,
 }) => {
   return (
     <>
       <StartGame startGame={startGame} />
       {player.role === "spymaster" && cards && <SpymasterBoard cards={cards} />}
       {cards && (
-        <CardList cards={cards} handleGuess={handleGuess} guesses={guesses} />
+        <CardList cards={cards} currTeam={currTeam} guesses={guesses} />
       )}
-      {teams && teams.redTeam && teams.blueTeam && (
-        <PlayerList redTeam={teams.redTeam} blueTeam={teams.blueTeam} />
+      {teams.red && teams.blue && (
+        <PlayerList redTeam={teams.red.players} blueTeam={teams.blue.players} />
       )}
     </>
   );

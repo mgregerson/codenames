@@ -1,10 +1,11 @@
 import "./App.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import React from "react";
 import CardList from "../CardList/CardList.tsx";
 import { useCardContext } from "../../context/cardContext";
 import { SocketContext } from "../../context/socketContext";
 import GameContainer from "../GameContainer/GameContainer";
+import codenamesApi from "../../utils/api";
 import PlayerRegistration from "../PlayerRegistration/PlayerRegistration";
 import StartGame from "../StartGame/StartGame";
 import { set } from "react-hook-form";
@@ -17,11 +18,18 @@ function App() {
   const [teams, setTeams] = useState([]);
   const [guesses, setGuesses] = useState([]);
   const [currTeam, setCurrTeam] = useState(null);
+  const [newCards, setNewCards] = useState([]);
 
-  console.log("THE PLAYER IN APP IS", player);
-  console.log("THE PLAYERS IN APP IS", players);
-  console.log("THE TEAMS IN APP IS", teams);
-  console.log("THE GUESSES IN APP IS", guesses);
+  console.log(guesses, "THE guesses in app");
+  console.log(currTeam, "currTeam");
+
+  useEffect(() => {
+    async function getCards() {
+      const allCards = await codenamesApi.getCardsForGame();
+      setNewCards(allCards);
+    }
+    getCards();
+  }, []);
 
   useEffect(() => {
     // Handle player joining event
@@ -29,8 +37,8 @@ function App() {
       setPlayers((prevPlayers) => [...prevPlayers, newPlayerName]);
     });
 
-    socket.on("teamUpdate", (redTeam, blueTeam) => {
-      setTeams({ redTeam, blueTeam });
+    socket.on("teamUpdate", (teams) => {
+      setTeams(teams);
     });
 
     // Handle player leaving event
@@ -42,12 +50,15 @@ function App() {
     });
 
     // Handle guess made event
-    socket.on("guessMade", (updatedCards) => {
+    socket.on("guessMade", (updatedCards, teams) => {
       setGuesses(updatedCards);
+      setTeams(teams);
+      checkForWinner(updatedCards, teams);
     });
 
-    socket.on("startGame", () => {
-      console.log("game started");
+    socket.on("gameStarted", (items) => {
+      setCurrTeam("blue");
+      setGuesses(items);
     });
 
     if (socket) {
@@ -60,6 +71,17 @@ function App() {
     };
   }, [socket]);
 
+  function checkForWinner(cards, teams) {
+    if (teams.red.score === 7) {
+      console.log("red team wins!");
+    } else if (teams.blue.score === 8) {
+      console.log("blue team wins!");
+    } else {
+      // update current team to other team
+      setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
+    }
+  }
+
   function handleJoinGame() {
     // Emit join event to the server
     socket.emit("join", socket.id);
@@ -71,23 +93,16 @@ function App() {
       prevPlayers.filter((player) => player.name !== data.playerName)
     );
     handleTeamSelect(data.team, data.role, data.playerName);
-    console.log(data);
   }
 
   function startGame() {
     // Emit start game event to the server
-    socket.emit("startGame");
-    setCurrTeam("blue");
+    socket.emit("startGame", cards);
   }
 
   const handleTeamSelect = (team, role, name) => {
     // Emit joinTeam event to the server
     socket.emit("joinTeam", team, role, name);
-  };
-
-  const handleGuess = (word, team) => {
-    // Emit makeGuess event to the server
-    socket.emit("makeGuess", word, team, cards);
   };
 
   return (
@@ -101,7 +116,7 @@ function App() {
           player={player}
           cards={cards}
           guesses={guesses}
-          handleGuess={handleGuess}
+          currTeam={currTeam}
           teams={teams}
           startGame={startGame}
         />
