@@ -44,12 +44,14 @@ export interface CardProps {
   team: string;
   guess: string;
   currTeam: "red" | "blue";
+  player: Player;
 }
 
 export interface CardListProps {
   cards: Cards;
   guesses: Guesses;
   currTeam: "red" | "blue";
+  player: Player;
 }
 
 export interface PlayerListProps {
@@ -64,6 +66,7 @@ export interface GameContainerProps {
   teams: Teams;
   startGame: () => void;
   currTeam: "red" | "blue";
+  numGuesses: number | "null";
 }
 
 interface Guess {

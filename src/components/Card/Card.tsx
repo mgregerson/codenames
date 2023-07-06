@@ -12,7 +12,7 @@ import { SocketContext } from "../../context/socketContext";
  */
 
 function Card(props: CardProps) {
-  const { word, team, currTeam } = props;
+  const { word, team, currTeam, player } = props;
   const [selectedCard, setSelectedCard] = React.useState<boolean>(false);
   const socket = useContext(SocketContext);
 
@@ -25,6 +25,20 @@ function Card(props: CardProps) {
     });
   }, [socket, word]);
 
+  function checkDisabled(): boolean {
+    // if the card has already been chosen, disable for all
+    if (selectedCard) {
+      return true;
+      // if the player is a spymaster, disable
+    } else if (player.role === "spymaster") {
+      return true;
+    } else if (player.team !== currTeam) {
+      // if the player is not on the current team, disable
+      return true;
+    }
+    return false;
+  }
+
   const handleClick = (): void => {
     if (!selectedCard) {
       socket.emit("makeGuess", word, currTeam);
@@ -34,7 +48,7 @@ function Card(props: CardProps) {
 
   return (
     <div className={`Card ${selectedCard ? "selected" : ""}`}>
-      <Button variant={team} disabled={selectedCard} onClick={handleClick}>
+      <Button variant={team} disabled={checkDisabled()} onClick={handleClick}>
         {word.toUpperCase()}
       </Button>
     </div>

@@ -19,9 +19,13 @@ function App() {
   const [guesses, setGuesses] = useState([]);
   const [currTeam, setCurrTeam] = useState(null);
   const [newCards, setNewCards] = useState([]);
+  const [winner, setWinner] = useState(null);
+  const [numGuesses, setNumGuesses] = useState(null);
 
   console.log(guesses, "THE guesses in app");
+  console.log(player, "THE PLAYER");
   console.log(currTeam, "currTeam");
+  console.log(teams, "THE TEAMS IN APP");
 
   useEffect(() => {
     async function getCards() {
@@ -42,7 +46,6 @@ function App() {
     });
 
     // Handle player leaving event
-    // Handle player leaving event
     socket.on("playerLeft", (playerName) => {
       setPlayers((prevPlayers) =>
         prevPlayers.filter((name) => name !== playerName)
@@ -50,10 +53,10 @@ function App() {
     });
 
     // Handle guess made event
-    socket.on("guessMade", (updatedCards, teams) => {
+    socket.on("guessMade", (updatedCards, teams, chosenWord) => {
       setGuesses(updatedCards);
       setTeams(teams);
-      checkForWinner(updatedCards, teams);
+      checkForWinner(updatedCards, teams, chosenWord);
     });
 
     socket.on("gameStarted", (items) => {
@@ -71,14 +74,24 @@ function App() {
     };
   }, [socket]);
 
-  function checkForWinner(cards, teams) {
+  function checkForWinner(cards, teams, chosenWord) {
     if (teams.red.score === 7) {
       console.log("red team wins!");
+      setWinner("red");
     } else if (teams.blue.score === 8) {
       console.log("blue team wins!");
+      setWinner("blue");
     } else {
-      // update current team to other team
-      setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
+      // dictate changeTeamLogic
+      if (chosenWord.team !== chosenWord.guess) {
+        // we want to update the currTeam to the other team
+        setCurrTeam((prevCurrTeam) =>
+          prevCurrTeam === "blue" ? "red" : "blue"
+        );
+      } else if (chosenWord.team === chosenWord.guess) {
+        // we want to reduce the number of guesses by 1
+        setNumGuesses((prevNumGuesses) => prevNumGuesses - 1);
+      }
     }
   }
 
@@ -119,6 +132,7 @@ function App() {
           currTeam={currTeam}
           teams={teams}
           startGame={startGame}
+          numGuesses={numGuesses}
         />
       )}
     </div>

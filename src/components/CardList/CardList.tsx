@@ -15,6 +15,7 @@ function CardList(props: CardListProps) {
               word={card.word}
               guess={card.guess}
               currTeam={props.currTeam}
+              player={props.player}
             />
           ))}
       </div>

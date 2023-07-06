@@ -18,7 +18,12 @@ const GameContainer: React.FC<GameContainerProps> = ({
       <StartGame startGame={startGame} />
       {player.role === "spymaster" && cards && <SpymasterBoard cards={cards} />}
       {cards && (
-        <CardList cards={cards} currTeam={currTeam} guesses={guesses} />
+        <CardList
+          cards={cards}
+          currTeam={currTeam}
+          guesses={guesses}
+          player={player}
+        />
       )}
       {teams.red && teams.blue && (
         <PlayerList redTeam={teams.red.players} blueTeam={teams.blue.players} />
