@@ -66,12 +66,27 @@ export interface GameContainerProps {
   teams: Teams;
   startGame: () => void;
   currTeam: "red" | "blue";
-  numGuesses: number | "null";
+  currClue: { clue: string; numGuesses: number };
 }
 
 export interface ScoreProps {
   redScore: number;
   blueScore: number;
+}
+
+export interface ProvideClueProps {
+  emitClue: (clueData: { clue: string; numGuesses: number }) => void;
+}
+
+export interface SpymasterContainerProps {
+  currTeam: string;
+  player: Player;
+  cards: CardType[];
+}
+
+export interface ClueTableProps {
+  clue: string;
+  numGuesses: number;
 }
 
 interface Guess {
