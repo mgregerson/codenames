@@ -20,7 +20,7 @@ export interface TeamPlayer {
 
 export interface Team {
   players: TeamPlayer[];
-  score: boolean;
+  score: number;
 }
 
 // includes players[] and score, a boolean
@@ -67,6 +67,11 @@ export interface GameContainerProps {
   startGame: () => void;
   currTeam: "red" | "blue";
   numGuesses: number | "null";
+}
+
+export interface ScoreProps {
+  redScore: number;
+  blueScore: number;
 }
 
 interface Guess {
