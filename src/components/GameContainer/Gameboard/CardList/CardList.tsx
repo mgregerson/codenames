@@ -1,7 +1,7 @@
 import Card from "../Card/Card";
 import "./CardList.css";
 import React from "react";
-import { CardListProps, CardType } from "../../types/types";
+import { CardListProps, CardType } from "../../../../types/types";
 
 function CardList(props: CardListProps) {
   return (

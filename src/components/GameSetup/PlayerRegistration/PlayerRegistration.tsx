@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { SocketContext } from "../../context/socketContext";
-import { PlayerRegistrationData } from "../../types/types";
+import { SocketContext } from "../../../context/socketContext";
+import { PlayerRegistrationData } from "../../../types/types";
 
 /** TeamSelect Component
  *  This component is used to select a team - red or blue.

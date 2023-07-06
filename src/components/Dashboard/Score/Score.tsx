@@ -1,5 +1,5 @@
 import React from "react";
-import { ScoreProps } from "../../types/types";
+import { ScoreProps } from "../../../types/types";
 
 /**
  * Score Component

@@ -1,9 +1,11 @@
 import React from "react";
-import StartGame from "../StartGame/StartGame";
-import SpymasterBoard from "../SpymasterBoard/SpyMasterBoard";
-import CardList from "../CardList/CardList";
-import PlayerList from "../PlayerList/PlayerList";
+import StartGame from "../GameSetup/StartGame/StartGame";
+import CardList from "./Gameboard/CardList/CardList";
+import PlayerList from "../Dashboard/PlayerList/PlayerList";
+import Score from "../Dashboard/Score/Score";
+import DisplayClue from "../Dashboard/DisplayClue/DisplayClue";
 import { GameContainerProps } from "../../types/types";
+import SpymasterContainer from "../SpymasterContainer/SpymasterContainer";
 
 const GameContainer: React.FC<GameContainerProps> = ({
   player,
@@ -12,12 +14,15 @@ const GameContainer: React.FC<GameContainerProps> = ({
   teams,
   startGame,
   currTeam,
+  currClue,
 }) => {
-  console.log(guesses, "Guesses in gamecontainer");
   return (
     <>
       {guesses.length === 0 && <StartGame startGame={startGame} />}
-      {player.role === "spymaster" && cards && <SpymasterBoard cards={cards} />}
+      {player.role === "spymaster" && cards && (
+        <SpymasterContainer cards={cards} currTeam={currTeam} player={player} />
+      )}
+
       {cards && (
         <CardList
           cards={cards}
@@ -27,7 +32,19 @@ const GameContainer: React.FC<GameContainerProps> = ({
         />
       )}
       {teams.red && teams.blue && (
-        <PlayerList redTeam={teams.red.players} blueTeam={teams.blue.players} />
+        <>
+          <PlayerList
+            redTeam={teams.red.players}
+            blueTeam={teams.blue.players}
+          />
+          <Score redScore={teams.red.score} blueScore={teams.blue.score} />
+          {currClue && (
+            <DisplayClue
+              clue={currClue.clue}
+              numGuesses={currClue.numGuesses}
+            />
+          )}
+        </>
       )}
     </>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { PlayerListProps } from "../../types/types";
+import { PlayerListProps } from "../../../types/types";
 /** PlayerList Component
  *
  * Props: redTeam - array of players on the red team {team, role, name, id}

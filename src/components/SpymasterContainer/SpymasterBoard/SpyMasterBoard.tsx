@@ -1,6 +1,6 @@
 import React from "react";
 import "./SpyMasterBoard.css";
-import { SpymasterBoardProps } from "../../types/types";
+import { SpymasterBoardProps } from "../../../types/types";
 
 function SpymasterBoard({ cards }: SpymasterBoardProps) {
   const renderBoard = () => {

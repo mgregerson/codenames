@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { CardProps } from "../../types/types";
+import { CardProps } from "../../../../types/types";
 import { useContext } from "react";
-import { SocketContext } from "../../context/socketContext";
+import { SocketContext } from "../../../../context/socketContext";
 
 /**
  * Card component.
