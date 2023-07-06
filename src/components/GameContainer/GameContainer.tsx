@@ -13,9 +13,10 @@ const GameContainer: React.FC<GameContainerProps> = ({
   startGame,
   currTeam,
 }) => {
+  console.log(guesses, "Guesses in gamecontainer");
   return (
     <>
-      <StartGame startGame={startGame} />
+      {guesses.length === 0 && <StartGame startGame={startGame} />}
       {player.role === "spymaster" && cards && <SpymasterBoard cards={cards} />}
       {cards && (
         <CardList
