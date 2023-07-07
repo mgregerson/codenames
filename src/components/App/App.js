@@ -27,7 +27,7 @@ function App() {
   console.log(player, "THE PLAYER");
   console.log(currTeam, "currTeam");
   console.log(teams, "THE TEAMS IN APP");
-  console.log("currClue", currClue);
+  console.log(currClue, "currClue in app");
 
   useEffect(() => {
     // Handle player joining event
@@ -47,14 +47,19 @@ function App() {
     });
 
     // Handle guess made event
-    socket.on("guessMade", (updatedCards, teams, chosenWord) => {
+    socket.on("guessMade", (updatedCards, teams, chosenWord, clueData) => {
       setGuesses(updatedCards);
       setTeams(teams);
-      updateGameData(updatedCards, teams, chosenWord);
+      setCurrClue(clueData);
+      console.log(clueData, "clueData in guessMade");
+      // Delay the call to updateGameData to ensure state updates take effect
+      setTimeout(() => {
+        updateGameData(teams, chosenWord, clueData);
+      }, 0);
     });
 
-    socket.on("clue", (clue) => {
-      setCurrClue(clue);
+    socket.on("clue", (clue, numGuesses) => {
+      setCurrClue((prevCurrClue) => ({ clue, numGuesses }));
     });
 
     socket.on("gameStarted", (items) => {
@@ -106,20 +111,38 @@ function App() {
    *
    */
 
-  function updateGameData(updatedCards, teams, chosenWord) {
+  // TODO: Fix UPDATEGAME DATA
+
+  // function updateGameData(updatedCards, teams, chosenWord) {
+  //   checkForWinner(teams);
+  //   console.log(currClue, "currClue in updateGameData");
+  //   // if (chosenWord.team !== chosenWord.guess) {
+  //   if (chosenWord.team !== chosenWord.guess) {
+  //     // we want to update the currTeam to the other team
+  //     setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
+  //   } else if (currClue.numGuesses === 0) {
+  //     // we want to update the currTeam to the other team
+  //     setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
+  //   } else if (chosenWord.team === chosenWord.guess) {
+  //     // we want to reduce the number of guesses by 1
+  //     setCurrClue((prevCurrClue) => {
+  //       return {
+  //         ...prevCurrClue,
+  //         numGuesses: prevCurrClue.numGuesses - 1,
+  //       };
+  //     });
+  //   }
+  // }
+
+  function updateGameData(teams, chosenWord, clueData) {
     checkForWinner(teams);
-    // if (chosenWord.team !== chosenWord.guess) {
+
     if (chosenWord.team !== chosenWord.guess) {
-      // we want to update the currTeam to the other team
+      console.log("chosenWord.team !== chosenWord.guess");
       setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
-    } else if (chosenWord.team === chosenWord.guess) {
-      // we want to reduce the number of guesses by 1
-      setCurrClue((prevCurrClue) => {
-        return {
-          ...prevCurrClue,
-          numGuesses: prevCurrClue.numGuesses - 1,
-        };
-      });
+    } else if (clueData.numGuesses === 0) {
+      console.log("clueData.numGuesses === 0");
+      setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
     }
   }
 
