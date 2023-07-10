@@ -24,7 +24,7 @@ function SpymasterContainer(props: SpymasterContainerProps) {
   }
 
   return (
-    <div className="SpymasterContainer">
+    <div className="SpymasterContainer pt-5">
       {player.role === "spymaster" && currTeam === player.team && (
         <ProvideClue emitClue={emitClue} />
       )}

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App/App";
 import { SocketProvider } from "./context/socketContext";
+import "./styles/index.css";
 import socket from "./socket";
 import { CardProvider } from "./context/cardContext";
 import reportWebVitals from "./reportWebVitals";
