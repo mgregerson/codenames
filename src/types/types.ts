@@ -54,6 +54,12 @@ export interface CardListProps {
   player: Player;
 }
 
+export interface TeamBoardProps {
+  players: TeamPlayer[];
+  teamColor: "red" | "blue";
+  teamScore: number | null;
+}
+
 export interface PlayerListProps {
   redTeam: Array<{ team: string; role: string; name: string; id: string }>;
   blueTeam: Array<{ team: string; role: string; name: string; id: string }>;
