@@ -1,14 +1,11 @@
 import "./App.css";
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import React from "react";
-import CardList from "../GameContainer/Gameboard/CardList/CardList";
 import { useCardContext } from "../../context/cardContext";
 import { SocketContext } from "../../context/socketContext";
 import GameContainer from "../GameContainer/GameContainer";
-import codenamesApi from "../../utils/api";
 import PlayerRegistration from "../GameSetup/PlayerRegistration/PlayerRegistration";
-import StartGame from "../GameSetup/StartGame/StartGame";
-import { set } from "react-hook-form";
+import backgroundImage from "../static/background.jpeg";
 
 function App() {
   const cards = useCardContext();
@@ -157,7 +154,10 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div
+      className="App bg-cover bg-center"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       {player === null ? (
         <PlayerRegistration
           handlePlayerRegistration={handlePlayerRegistration}
