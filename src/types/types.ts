@@ -1,9 +1,24 @@
+/** Game Related Interfaces */
+
 export interface CardType {
   word: string;
   team: "red" | "blue" | "neutral" | "death";
   guess: "red" | "blue" | "neutral" | "";
   selected: boolean;
 }
+
+interface Guess {
+  word: string;
+  team: string;
+  guess: string;
+  selected: boolean;
+}
+
+export type Guesses = Guess[];
+
+export type Cards = CardType[];
+
+/** Player-related interfaces */
 
 export interface Player {
   playerName: string;
@@ -23,14 +38,9 @@ export interface Team {
   score: number;
 }
 
-// includes players[] and score, a boolean
 export interface Teams {
   red: Team;
   blue: Team;
-}
-
-export interface SpymasterBoardProps {
-  cards: Cards;
 }
 
 export type PlayerRegistrationData = {
@@ -38,6 +48,8 @@ export type PlayerRegistrationData = {
   team: string;
   role: string;
 };
+
+/** Component Props Interfaces */
 
 export interface CardProps {
   word: string;
@@ -54,15 +66,14 @@ export interface CardListProps {
   player: Player;
 }
 
-export interface TeamBoardProps {
-  players: TeamPlayer[];
-  teamColor: "red" | "blue";
-  teamScore: number | null;
+export interface ClueTableProps {
+  clue: string;
+  numGuesses: number;
 }
 
-export interface PlayerListProps {
-  redTeam: Array<{ team: string; role: string; name: string; id: string }>;
-  blueTeam: Array<{ team: string; role: string; name: string; id: string }>;
+export interface DisplayWinnerProps {
+  winningTeam: string;
+  players: TeamPlayer[];
 }
 
 export interface GameContainerProps {
@@ -75,13 +86,22 @@ export interface GameContainerProps {
   currClue: { clue: string; numGuesses: number };
 }
 
+export interface PlayerListProps {
+  redTeam: Array<{ team: string; role: string; name: string; id: string }>;
+  blueTeam: Array<{ team: string; role: string; name: string; id: string }>;
+}
+
+export interface ProvideClueProps {
+  emitClue: (clueData: { clue: string; numGuesses: number }) => void;
+}
+
 export interface ScoreProps {
   redScore: number;
   blueScore: number;
 }
 
-export interface ProvideClueProps {
-  emitClue: (clueData: { clue: string; numGuesses: number }) => void;
+export interface SpymasterBoardProps {
+  cards: Cards;
 }
 
 export interface SpymasterContainerProps {
@@ -90,18 +110,8 @@ export interface SpymasterContainerProps {
   cards: CardType[];
 }
 
-export interface ClueTableProps {
-  clue: string;
-  numGuesses: number;
+export interface TeamBoardProps {
+  players: TeamPlayer[];
+  teamColor: "red" | "blue";
+  teamScore: number | null;
 }
-
-interface Guess {
-  word: string;
-  team: string;
-  guess: string;
-  selected: boolean;
-}
-
-export type Guesses = Guess[];
-
-export type Cards = CardType[];
