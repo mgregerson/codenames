@@ -10,8 +10,6 @@ import GameContainer from "../GameContainer/GameContainer";
 import PlayerRegistration from "../GameSetup/PlayerRegistration/PlayerRegistration";
 import DisplayWinner from "../DisplayWinner/DisplayWinner";
 
-import backgroundImage from "../../styles/background.jpeg";
-
 function App() {
   const cards = useCardContext();
   const socket = useContext(SocketContext);
@@ -124,6 +122,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <Header /> */}
       {player === null ? (
         <PlayerRegistration
           handlePlayerRegistration={handlePlayerRegistration}
