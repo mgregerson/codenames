@@ -30,7 +30,6 @@ class codenamesApi {
     let res = await this.request(`cards`);
     return res.cards;
   }
-  // Individual API routes
 }
 
 export default codenamesApi;
