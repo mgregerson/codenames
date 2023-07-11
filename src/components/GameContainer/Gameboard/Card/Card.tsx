@@ -4,6 +4,11 @@ import { CardProps } from "../../../../types/types";
 import { useContext } from "react";
 import { SocketContext } from "../../../../context/socketContext";
 
+import redGuess from "../../../../styles/redGuess.png";
+import blueGuess from "../../../../styles/blueGuess.png";
+import neutralGuess from "../../../../styles/neutralGuess.png";
+import deathGuess from "../../../../styles/deathGuess.png";
+
 /**
  * Card component.
  * Represents an individual codename card.
@@ -46,16 +51,46 @@ function Card(props: CardProps) {
     }
   };
 
+  let imageOverlay = null;
+
+  switch (team) {
+    case "red":
+      imageOverlay = redGuess;
+      break;
+    case "blue":
+      imageOverlay = blueGuess;
+      break;
+    case "neutral":
+      imageOverlay = neutralGuess;
+      break;
+    case "death":
+      imageOverlay = deathGuess;
+      break;
+    default:
+      break;
+  }
+
   return (
     <div
-      className={`Card ${
+      className={`Card relative ${
         selectedCard ? "selected" : ""
       } display: flex items-center justify-center w-36 h-24 m-1 rounded-md border-1
       bg-[url('neutralCard.png')] bg-cover bg-no-repeat
     `}
     >
+      {selectedCard && imageOverlay && (
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            background: `url(${imageOverlay})`,
+            backgroundSize: "cover",
+          }}
+        ></div>
+      )}
       <Button
-        className="w-full h-full border-none text-sm font-bold text-black uppercase cursor-pointer flex items-center justify-center"
+        className={`w-full h-full border-none text-sm font-bold text-black uppercase cursor-pointer flex items-center justify-center ${
+          selectedCard ? "invisible" : ""
+        }`}
         variant={team}
         disabled={checkDisabled()}
         onClick={handleClick}
