@@ -2,8 +2,8 @@ import React from "react";
 import TeamPlayer from "./TeamList/TeamPlayer/TeamPlayer";
 import TeamScore from "./TeamList/TeamScore/TeamScore";
 import { TeamBoardProps } from "../../types/types";
-import redCard from "../static/redCard.png";
-import blueCard from "../static/blueCard.png";
+import redGuess from "../../styles/redGuess.png";
+import blueGuess from "../../styles/blueGuess.png";
 /** TeamList Component
  *
  * Renders a container for a team - red or blue
@@ -20,7 +20,7 @@ export default function TeamBoard({
   teamColor,
   teamScore,
 }: TeamBoardProps): JSX.Element {
-  const cardImage = teamColor === "red" ? redCard : blueCard;
+  const cardImage = teamColor === "red" ? redGuess : blueGuess;
 
   return (
     <div id={`TeamBoard-${teamColor}`} className={`bg-${teamColor}-dark`}>
