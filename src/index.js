@@ -7,11 +7,17 @@ import socket from "./socket";
 import { CardProvider } from "./context/cardContext";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+import backgroundImage from "./styles/background.jpeg";
 
 ReactDOM.render(
   <SocketProvider socket={socket}>
     <CardProvider>
-      <App />
+      <div
+        className="bg-cover bg-center fixed inset-0"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      >
+        <App />
+      </div>
     </CardProvider>
   </SocketProvider>,
   document.getElementById("root")
