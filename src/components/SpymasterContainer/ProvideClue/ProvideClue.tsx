@@ -23,25 +23,39 @@ function ProvideClue({ emitClue }: ProvideClueProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={clueData.clue}
-        onChange={(e) => setClueData({ ...clueData, clue: e.target.value })}
-        placeholder="Enter a clue"
-        required
-      />
-      <input
-        type="number"
-        value={clueData.numGuesses}
-        onChange={(e) =>
-          setClueData({ ...clueData, numGuesses: parseInt(e.target.value) })
-        }
-        placeholder="Number of Guesses"
-        required
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div
+      className="w-full flex justify-end landscape:justify-center"
+      style={{ opacity: 1, transform: "none" }}
+    >
+      <form onSubmit={handleSubmit} className="flex items-center space-x-2">
+        <input
+          type="text"
+          value={clueData.clue}
+          onChange={(e) => setClueData({ ...clueData, clue: e.target.value })}
+          placeholder="Type Your Clue Here"
+          required
+          className="rounded-md shadow-sm bg-white px-4 py-2 outline-none"
+          style={{ zIndex: 1 }}
+        />
+        <input
+          type="number"
+          value={clueData.numGuesses}
+          onChange={(e) =>
+            setClueData({ ...clueData, numGuesses: parseInt(e.target.value) })
+          }
+          placeholder="Number of Guesses"
+          required
+          className="rounded-md shadow-sm bg-white px-4 py-2 outline-none"
+          style={{ zIndex: 1 }}
+        />
+        <button
+          type="submit"
+          className="bg-emerald-700 rounded-md px-4 py-2 text-white bg-opacity-100 z-0"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 

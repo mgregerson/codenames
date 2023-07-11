@@ -22,7 +22,7 @@ function SpymasterBoard({ cards }: SpymasterBoardProps) {
 
   return (
     <div>
-      <h3 className="text-3xl font-bold underline">Board</h3>
+      <h3 className="text-3xl font-bold">Board</h3>
       <div className="SpymasterBoard">{renderBoard()}</div>
     </div>
   );
