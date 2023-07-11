@@ -5,8 +5,8 @@ import { CardListProps, CardType } from "../../../../types/types";
 
 function CardList(props: CardListProps) {
   return (
-    <div className="CardList w-1/2 mx-auto">
-      <div className="grid grid-cols-5 gap-4">
+    <div className="CardList w-1/2 mx-auto display: flex flex-wrap justify-center mt-4">
+      <div className="grid grid-cols-5 gap-0">
         {props.cards &&
           props.cards.map((card: CardType) => (
             <Card

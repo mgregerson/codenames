@@ -50,17 +50,21 @@ function Card(props: CardProps) {
     <div
       className={`Card ${
         selectedCard ? "selected" : ""
-      } display: flex items-center justify-center w-32 h-20 m-1 rounded-md border-1
+      } display: flex items-center justify-center w-36 h-24 m-1 rounded-md border-1
       bg-[url('neutralCard.png')] bg-cover bg-no-repeat
     `}
     >
       <Button
-        className="w-full h-full p-2.5 border-none rounded text-sm font-bold text-black uppercase cursor-pointer"
+        className="w-full h-full border-none text-sm font-bold text-black uppercase cursor-pointer flex items-center justify-center"
         variant={team}
         disabled={checkDisabled()}
         onClick={handleClick}
       >
-        {word.toUpperCase()}
+        <div
+          className={`${word} text-center mt-[38px] font-bold flex items-center justify-center`}
+        >
+          {word.toUpperCase()}
+        </div>
       </Button>
     </div>
   );
