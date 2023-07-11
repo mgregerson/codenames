@@ -1,11 +1,16 @@
 import "./App.css";
+
 import { useEffect, useState, useContext } from "react";
 import React from "react";
+
 import { useCardContext } from "../../context/cardContext";
 import { SocketContext } from "../../context/socketContext";
+
 import GameContainer from "../GameContainer/GameContainer";
 import PlayerRegistration from "../GameSetup/PlayerRegistration/PlayerRegistration";
-import backgroundImage from "../static/background.jpeg";
+import DisplayWinner from "../DisplayWinner/DisplayWinner";
+
+import backgroundImage from "../../styles/background.jpeg";
 
 function App() {
   const cards = useCardContext();
@@ -15,9 +20,7 @@ function App() {
   const [teams, setTeams] = useState([]);
   const [guesses, setGuesses] = useState([]);
   const [currTeam, setCurrTeam] = useState(null);
-  const [newCards, setNewCards] = useState([]);
   const [winner, setWinner] = useState(null);
-  const [numGuesses, setNumGuesses] = useState(null);
   const [currClue, setCurrClue] = useState({ clue: null, numGuesses: 0 });
 
   console.log(guesses, "THE guesses in app");
@@ -97,40 +100,6 @@ function App() {
     socket.emit("startGame", cards);
   }
 
-  //
-  /** this function replaces checkForWinner: it will do the following:
-   * call checkForWinner -> if winner, setWinner
-   *
-   * if not winner, then:
-   * 1. if chosenWord.team !== chosenWord.guess, then changeTeamLogic
-   * 2. if currClue.numGuesses === 0, then changeTeamLogic
-   * 3. if chosenWord.team === chosenWord.guess, then reduce numGuesses by 1
-   *
-   */
-
-  // TODO: Fix UPDATEGAME DATA
-
-  // function updateGameData(updatedCards, teams, chosenWord) {
-  //   checkForWinner(teams);
-  //   console.log(currClue, "currClue in updateGameData");
-  //   // if (chosenWord.team !== chosenWord.guess) {
-  //   if (chosenWord.team !== chosenWord.guess) {
-  //     // we want to update the currTeam to the other team
-  //     setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
-  //   } else if (currClue.numGuesses === 0) {
-  //     // we want to update the currTeam to the other team
-  //     setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
-  //   } else if (chosenWord.team === chosenWord.guess) {
-  //     // we want to reduce the number of guesses by 1
-  //     setCurrClue((prevCurrClue) => {
-  //       return {
-  //         ...prevCurrClue,
-  //         numGuesses: prevCurrClue.numGuesses - 1,
-  //       };
-  //     });
-  //   }
-  // }
-
   function updateGameData(teams, chosenWord, clueData) {
     checkForWinner(teams);
 
@@ -146,18 +115,15 @@ function App() {
   function checkForWinner(teams) {
     if (teams.red.score === 7) {
       console.log("red team wins!");
-      setWinner("red");
+      setWinner({ team: "red", players: teams.red.players });
     } else if (teams.blue.score === 8) {
       console.log("blue team wins!");
-      setWinner("blue");
+      setWinner({ team: "blue", players: teams.blue.players });
     }
   }
 
   return (
-    <div
-      className="App bg-cover bg-center"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <div className="App">
       {player === null ? (
         <PlayerRegistration
           handlePlayerRegistration={handlePlayerRegistration}
@@ -172,6 +138,9 @@ function App() {
           startGame={startGame}
           currClue={currClue}
         />
+      )}
+      {winner !== null && (
+        <DisplayWinner winningTeam={winner.team} players={winner.players} />
       )}
     </div>
   );
