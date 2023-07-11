@@ -10,7 +10,8 @@ This front end was built with the following tech:
 
 - ![React](https://img.icons8.com/office/30/000000/react.png) React
 - ![TypeScript](https://img.icons8.com/color/30/000000/typescript.png) TypeScript
-- ![Tailwind CSS](https://img.icons8.com/color/30/000000/typescript.png) Tailwind CSS
+- ![Tailwind CSS](https://img.icons8.com/?size=2x&id=x7XMNGh2vdqA&format=png) Tailwind CSS
+
 
 ## Installation
 
