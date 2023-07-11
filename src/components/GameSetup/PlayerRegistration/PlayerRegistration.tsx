@@ -36,39 +36,62 @@ const PlayerRegistration = ({
   };
 
   return (
-    <div>
-      <h2>Player Registration</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>
-          Player Name:
-          <input {...register("playerName", { required: true })} />
-          {errors.playerName && <span>This field is required</span>}
-        </label>
-        <br />
-        <label>
-          Team:
-          <select {...register("team", { required: true })}>
-            <option value="">Select Team</option>
-            <option value="red">Red</option>
-            <option value="blue">Blue</option>
-          </select>
-          {errors.team && <span>This field is required</span>}
-        </label>
-        <br />
-        <label>
-          Role:
-          <select {...register("role", { required: true })}>
-            <option value="">Select Role</option>
-            <option value="spymaster">Spymaster</option>
-            <option value="guesser">Guesser</option>
-          </select>
-          {errors.role && <span>This field is required</span>}
-        </label>
-        <br />
-        <button className="btn btn-primary" type="submit">
-          Join Game
-        </button>
-      </form>
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-2/5">
+        <h2 className="text-2xl font-bold mb-4">Let's Play Codenames!</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label className="flex flex-col mb-4">
+            <span className="mb-1">Player Name:</span>
+            <input
+              {...register("playerName", { required: true })}
+              className="border border-gray-300 px-2 py-1 shadow-sm rounded"
+            />
+            {errors.playerName && (
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
+            )}
+          </label>
+          <label className="flex flex-col mb-4">
+            <span className="mb-1">Team:</span>
+            <select
+              {...register("team", { required: true })}
+              className="border border-gray-300 px-2 py-1 shadow-sm rounded"
+            >
+              <option value="">Select Team</option>
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+            </select>
+            {errors.team && (
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
+            )}
+          </label>
+          <label className="flex flex-col mb-4">
+            <span className="mb-1">Role:</span>
+            <select
+              {...register("role", { required: true })}
+              className="border border-gray-300 px-2 py-1 shadow-sm rounded"
+            >
+              <option value="">Select Role</option>
+              <option value="spymaster">Spymaster</option>
+              <option value="guesser">Guesser</option>
+            </select>
+            {errors.role && (
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
+            )}
+          </label>
+          <button
+            className="bg-emerald-700 py-2 px-4 rounded shadow text-white font-bold"
+            type="submit"
+          >
+            Join Game
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
