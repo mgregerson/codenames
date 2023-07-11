@@ -1,7 +1,7 @@
 import "./App.css";
 
-import { useEffect, useState, useContext } from "react";
 import React from "react";
+import { useEffect, useState, useContext } from "react";
 
 import { useCardContext } from "../../context/cardContext";
 import { SocketContext } from "../../context/socketContext";
@@ -49,7 +49,6 @@ function App() {
       setGuesses(updatedCards);
       setTeams(teams);
       setCurrClue(clueData);
-      console.log(clueData, "clueData in guessMade");
       // Delay the call to updateGameData to ensure state updates take effect
       setTimeout(() => {
         updateGameData(teams, chosenWord, clueData);
@@ -102,20 +101,16 @@ function App() {
     checkForWinner(teams);
 
     if (chosenWord.team !== chosenWord.guess) {
-      console.log("chosenWord.team !== chosenWord.guess");
       setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
     } else if (clueData.numGuesses === 0) {
-      console.log("clueData.numGuesses === 0");
       setCurrTeam((prevCurrTeam) => (prevCurrTeam === "blue" ? "red" : "blue"));
     }
   }
 
   function checkForWinner(teams) {
     if (teams.red.score === 7) {
-      console.log("red team wins!");
       setWinner({ team: "red", players: teams.red.players });
     } else if (teams.blue.score === 8) {
-      console.log("blue team wins!");
       setWinner({ team: "blue", players: teams.blue.players });
     }
   }

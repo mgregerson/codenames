@@ -26,9 +26,9 @@ export default function TeamBoard({
   return (
     <div
       id={`TeamBoard-${teamColor}`}
-      className="rounded-lg p-2 mt-10 mx-2 mb-6 grid grid-rows-[auto,1fr] shadow-xl border-1 border-black"
+      className="rounded-lg p-2 mt-10 mb-6 grid grid-rows-[auto,1fr] shadow-xl border-1 border-black"
     >
-      <div className="box-border flex items-center justify-between">
+      <div className="box-border flex flex-row items-center justify-between">
         <div className="w-3/4">
           <img src={cardImage} alt={teamColor} className="rounded-xl" />
         </div>
@@ -43,4 +43,25 @@ export default function TeamBoard({
       </div>
     </div>
   );
+}
+
+{
+  /* <div
+      id={`TeamBoard-${teamColor}`}
+      className="rounded-lg p-2 mt-10 mx-2 mb-6 grid grid-rows-[auto,1fr] shadow-xl border-1 border-black"
+    >
+      <div className="box-border flex flex-col items-center justify-between">
+        <div className="w-3/4">
+          <img src={cardImage} alt={teamColor} className="rounded-xl" />
+        </div>
+        <div className="w-1/4 text-white font-extrabold text-5xl">
+          {teamScore && <TeamScore score={teamScore} />}
+        </div>
+      </div>
+      <div className="flex flex-wrap mt-2">
+        {players.map((player, index) => (
+          <TeamPlayer key={index} name={player.name} />
+        ))}
+      </div>
+    </div> */
 }
