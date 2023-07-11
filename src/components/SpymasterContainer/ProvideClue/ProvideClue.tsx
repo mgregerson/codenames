@@ -24,7 +24,7 @@ function ProvideClue({ emitClue }: ProvideClueProps) {
 
   return (
     <div
-      className="w-full flex justify-end landscape:justify-center"
+      className="w-full flex justify-end landscape:justify-center mt-5"
       style={{ opacity: 1, transform: "none" }}
     >
       <form onSubmit={handleSubmit} className="flex items-center space-x-2">
