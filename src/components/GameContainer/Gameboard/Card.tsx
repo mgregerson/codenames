@@ -31,6 +31,9 @@ function Card(props: CardProps) {
   const [selectedCard, setSelectedCard] = React.useState<boolean>(false);
   const socket = useContext(SocketContext);
 
+  console.log(player, "player in card");
+  console.log(team, "team in card");
+
   useEffect(() => {
     // Handle making a guess
     socket.on("updateSelected", (chosenWord: any) => {
@@ -80,14 +83,24 @@ function Card(props: CardProps) {
       break;
   }
 
-  console.log(selectedCard, "selectedCard", imageOverlay, "imageOverlay");
-
   return (
     <div
-      className={`Card relative ${
+      className={`relative ${
         selectedCard ? "selected" : ""
       } w-36 h-24 m-1 rounded-md border-1
-      bg-[url('neutralCard.png')] bg-cover bg-no-repeat
+      ${
+        team === "red" &&
+        player.role === "spymaster" &&
+        'bg-[url("redCard.png")] bg-cover bg-no-repeat'
+      } ${
+        team === "blue" &&
+        player.role === "spymaster" &&
+        'bg-[url("blueCard.png")] bg-cover bg-no-repeat'
+      } ${
+        team === "death" &&
+        player.role === "spymaster" &&
+        'bg-[url("deathCard.png")] bg-cover bg-no-repeat'
+      } bg-[url("neutralCard.png")] bg-cover bg-no-repeat
     `}
     >
       {selectedCard && imageOverlay && (
@@ -100,7 +113,9 @@ function Card(props: CardProps) {
         ></div>
       )}
       <Button
-        className={`w-full h-full border-none text-sm font-bold text-black uppercase cursor-pointer flex items-center justify-center ${
+        className={`w-full h-full border-none text-sm font-bold ${
+          team === "death" && "text-white"
+        } text-black uppercase cursor-pointer flex items-center justify-center ${
           selectedCard ? "invisible" : ""
         }`}
         variant={team}

@@ -4,7 +4,6 @@ import CardList from "./Gameboard/CardList";
 import TeamBoard from "../TeamContainer/TeamBoard";
 import DisplayClue from "../Dashboard/DisplayClue";
 import { GameContainerProps } from "../../types/types";
-import SpymasterContainer from "../SpymasterContainer/SpymasterContainer";
 import ProvideClue from "../SpymasterContainer/ProvideClue/ProvideClue";
 import { SocketContext } from "../../context/socketContext";
 
@@ -30,7 +29,7 @@ const GameContainer: React.FC<GameContainerProps> = ({
       <div className="flex flex-col h-full mx-4">
         <div className="w-full mb-4 lg:mb-0">
           <div className="flex lg:flex-row flex-col">
-            <div className="w-full lg:w-1/6 md:w-1/6 sm:w-1/12">
+            <div className="w-full lg:w-1/4 md:w-1/4 sm:w-2/12">
               {teams.red && (
                 <TeamBoard
                   players={teams.red.players}
@@ -38,28 +37,6 @@ const GameContainer: React.FC<GameContainerProps> = ({
                   teamScore={teams.red.score}
                 />
               )}
-              {player.role === "spymaster" && cards && (
-                <SpymasterContainer
-                  cards={cards}
-                  currTeam={currTeam}
-                  player={player}
-                />
-              )}
-            </div>
-            <div className="w-full lg:w-2/3 md:w-2/3 sm:w-5/6">
-              {cards && (
-                <CardList
-                  cards={cards}
-                  currTeam={currTeam}
-                  guesses={guesses}
-                  player={player}
-                />
-              )}
-              {player.role === "spymaster" &&
-                cards &&
-                currTeam === player.team && <ProvideClue emitClue={emitClue} />}
-            </div>
-            <div className="w-full lg:w-1/6 md:w-1/6 sm:w-1/12">
               {teams.blue && (
                 <TeamBoard
                   players={teams.blue.players}
@@ -73,6 +50,19 @@ const GameContainer: React.FC<GameContainerProps> = ({
                   numGuesses={currClue.numGuesses}
                 />
               )}
+            </div>
+            <div className="w-full lg:w-3/4 md:w-3/4 sm:w-10/12">
+              {cards && (
+                <CardList
+                  cards={cards}
+                  currTeam={currTeam}
+                  guesses={guesses}
+                  player={player}
+                />
+              )}
+              {player.role === "spymaster" &&
+                cards &&
+                currTeam === player.team && <ProvideClue emitClue={emitClue} />}
             </div>
           </div>
         </div>
