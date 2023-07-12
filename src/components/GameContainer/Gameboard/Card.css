@@ -1,0 +1,71 @@
+.Card-red-spymaster {
+  background: url("../../../styles/redCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-blue-spymaster {
+  background: url("../../../styles/blueCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-neutral-spymaster {
+  background: url("../../../styles/neutralCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-death-spymaster {
+  background: url("../../../styles/deathCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-red-guesser {
+  background: url("../../../styles/neutralCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-blue-guesser {
+  background: url("../../../styles/neutralCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-neutral-guesser {
+  background: url("../../../styles/neutralCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-death-guesser {
+  background: url("../../../styles/neutralCard.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-blue {
+  background: url("../../../styles/blueGuess.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-red {
+  background: url("../../../styles/redGuess.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-neutral {
+  background: url("../../../styles/neutralGuess.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Card-death {
+  background: url("../../../styles/deathGuess.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

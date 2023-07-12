@@ -4,6 +4,8 @@ import { CardProps } from "../../../types/types";
 import { useContext } from "react";
 import { SocketContext } from "../../../context/socketContext";
 
+import "./Card.css";
+
 import redGuess from "../../../styles/redGuess.png";
 import blueGuess from "../../../styles/blueGuess.png";
 import neutralGuess from "../../../styles/neutralGuess.png";
@@ -84,50 +86,37 @@ function Card(props: CardProps) {
   }
 
   return (
-    <div
-      className={`relative ${
-        selectedCard ? "selected" : ""
-      } w-36 h-24 m-1 rounded-md border-1
-      ${
-        team === "red" &&
-        player.role === "spymaster" &&
-        'bg-[url("redCard.png")] bg-cover bg-no-repeat'
-      } ${
-        team === "blue" &&
-        player.role === "spymaster" &&
-        'bg-[url("blueCard.png")] bg-cover bg-no-repeat'
-      } ${
-        team === "death" &&
-        player.role === "spymaster" &&
-        'bg-[url("deathCard.png")] bg-cover bg-no-repeat'
-      } bg-[url("neutralCard.png")] bg-cover bg-no-repeat
-    `}
-    >
-      {selectedCard && imageOverlay && (
+    <div>
+      {selectedCard && imageOverlay ? (
         <div
-          className="inset-0 flex items-center justify-center"
-          style={{
-            background: `url(${imageOverlay})`,
-            backgroundSize: "cover",
-          }}
+          className={`Card-${team} relative ${
+            selectedCard ? "selected" : ""
+          } w-36 h-24 m-1 rounded-md border-1`}
         ></div>
-      )}
-      <Button
-        className={`w-full h-full border-none text-sm font-bold ${
-          team === "death" && "text-white"
-        } text-black uppercase cursor-pointer flex items-center justify-center ${
-          selectedCard ? "invisible" : ""
-        }`}
-        variant={team}
-        disabled={checkDisabled()}
-        onClick={handleClick}
-      >
+      ) : (
         <div
-          className={`${word} text-center mt-[38px] font-bold flex items-center justify-center`}
+          className={`Card-${team}-${player.role} relative ${
+            selectedCard ? "selected" : ""
+          } w-36 h-24 m-1 rounded-md border-1`}
         >
-          {word.toUpperCase()}
+          <Button
+            className={`w-full h-full border-none text-sm font-bold ${
+              team === "death" && "text-white"
+            } text-black uppercase cursor-pointer flex items-center justify-center ${
+              selectedCard ? "invisible" : ""
+            }`}
+            variant={team}
+            disabled={checkDisabled()}
+            onClick={handleClick}
+          >
+            <div
+              className={`${word} text-center mt-[38px] font-bold flex items-center justify-center`}
+            >
+              {word.toUpperCase()}
+            </div>
+          </Button>
         </div>
-      </Button>
+      )}
     </div>
   );
 }
