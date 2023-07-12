@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import StartGame from "../GameSetup/StartGame/StartGame";
-import CardList from "./Gameboard/CardList/CardList";
+import CardList from "./Gameboard/CardList";
 import TeamBoard from "../TeamContainer/TeamBoard";
 import DisplayClue from "../Dashboard/DisplayClue";
 import { GameContainerProps } from "../../types/types";

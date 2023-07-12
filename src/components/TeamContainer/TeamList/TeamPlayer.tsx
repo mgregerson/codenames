@@ -1,14 +1,19 @@
-/** TeamPlayer
+import React from "react";
+import { TeamPlayerProps } from "../../../types/types";
+
+/** TeamPlayer component.
  *
- * Lists a player's name on a specific team (red or blue)
+ * This component displays the team's players.
+ *
+ * Props:
+ * - name: a string
+ *
+ * State:
+ * - None
+ *
+ * App -> GameContainer -> TeamBoard -> TeamPlayer
  *
  */
-
-import React from "react";
-
-interface TeamPlayerProps {
-  name: string;
-}
 
 export default function TeamPlayer({ name }: TeamPlayerProps): JSX.Element {
   return (

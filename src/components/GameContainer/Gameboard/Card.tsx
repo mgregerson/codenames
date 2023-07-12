@@ -1,19 +1,29 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { CardProps } from "../../../../types/types";
+import { CardProps } from "../../../types/types";
 import { useContext } from "react";
-import { SocketContext } from "../../../../context/socketContext";
+import { SocketContext } from "../../../context/socketContext";
 
-import redGuess from "../../../../styles/redGuess.png";
-import blueGuess from "../../../../styles/blueGuess.png";
-import neutralGuess from "../../../../styles/neutralGuess.png";
-import deathGuess from "../../../../styles/deathGuess.png";
+import redGuess from "../../../styles/redGuess.png";
+import blueGuess from "../../../styles/blueGuess.png";
+import neutralGuess from "../../../styles/neutralGuess.png";
+import deathGuess from "../../../styles/deathGuess.png";
 
-/**
- * Card component.
- * Represents an individual codename card.
- * Receives props such as the codename, revealed status, and any additional information.
- * Handles user interactions, such as card selection.
+/** Card Component
+ *
+ * This component is a single card on the gameboard.
+ *
+ * Props:
+ * - word: a string
+ * - team: a string
+ * - currTeam: a string
+ * - player: an object
+ *
+ * State:
+ * - selectedCard: a boolean
+ *
+ * App -> GameContainer -> CardList -> Card
+ *
  */
 
 function Card(props: CardProps) {
@@ -70,17 +80,19 @@ function Card(props: CardProps) {
       break;
   }
 
+  console.log(selectedCard, "selectedCard", imageOverlay, "imageOverlay");
+
   return (
     <div
       className={`Card relative ${
         selectedCard ? "selected" : ""
-      } display: flex items-center justify-center w-36 h-24 m-1 rounded-md border-1
+      } w-36 h-24 m-1 rounded-md border-1
       bg-[url('neutralCard.png')] bg-cover bg-no-repeat
     `}
     >
       {selectedCard && imageOverlay && (
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="inset-0 flex items-center justify-center"
           style={{
             background: `url(${imageOverlay})`,
             backgroundSize: "cover",

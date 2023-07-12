@@ -2,8 +2,3 @@
 .CardList .grid {
   grid-template-columns: repeat(5, 1fr);
 }
-
-.Card {
-  border: 1px solid #ccc;
-  width: 100px;
-}

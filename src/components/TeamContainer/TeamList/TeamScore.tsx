@@ -4,6 +4,20 @@ interface TeamScoreProps {
   score: number | null;
 }
 
+/** TeamScore component.
+ *
+ * This component displays the team's score.
+ *
+ * Props:
+ * - score: a number
+ *
+ * State:
+ * - None
+ *
+ * App -> GameContainer -> TeamBoard -> TeamScore
+ *
+ */
+
 export default function TeamScore({ score }: TeamScoreProps): JSX.Element {
   return (
     <section className="relative h-12 landscape:h-28">
