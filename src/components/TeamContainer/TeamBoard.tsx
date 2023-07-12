@@ -1,6 +1,6 @@
 import React from "react";
-import TeamPlayer from "./TeamList/TeamPlayer/TeamPlayer";
-import TeamScore from "./TeamList/TeamScore/TeamScore";
+import TeamPlayer from "./TeamList/TeamPlayer";
+import TeamScore from "./TeamList/TeamScore";
 import { TeamBoardProps } from "../../types/types";
 import "./TeamBoard.css";
 import redGuess from "../../styles/redGuess.png";
