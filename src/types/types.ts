@@ -91,6 +91,10 @@ export interface PlayerListProps {
   blueTeam: Array<{ team: string; role: string; name: string; id: string }>;
 }
 
+export interface PlayerRegistrationProps {
+  handlePlayerRegistration: (playerData: PlayerRegistrationData) => void;
+}
+
 export interface ProvideClueProps {
   emitClue: (clueData: { clue: string; numGuesses: number }) => void;
 }
@@ -114,4 +118,12 @@ export interface TeamBoardProps {
   players: TeamPlayer[];
   teamColor: "red" | "blue";
   teamScore: number | null;
+}
+
+export interface TeamPlayerProps {
+  name: string;
+}
+
+export interface StartGameProps {
+  startGame: () => void;
 }
