@@ -1,4 +1,10 @@
 /* Card Grid Styles */
 .CardList .grid {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5);
+}
+
+@media (min-width: 768px) {
+  .Card {
+    width: calc(60% / 5); /* 12% of the screen's width for 5 columns */
+  }
 }

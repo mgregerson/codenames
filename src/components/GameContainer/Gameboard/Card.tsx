@@ -101,7 +101,7 @@ function Card(props: CardProps) {
         >
           <Button
             className={`w-full h-full border-none text-sm font-bold ${
-              team === "death" && "text-white"
+              team === "death" && player.role == "spymaster" && "text-white"
             } text-black uppercase cursor-pointer flex items-center justify-center ${
               selectedCard ? "invisible" : ""
             }`}

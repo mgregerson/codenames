@@ -26,44 +26,46 @@ const GameContainer: React.FC<GameContainerProps> = ({
     <>
       {guesses.length === 0 && <StartGame startGame={startGame} />}
 
-      <div className="flex flex-col h-full mx-4">
-        <div className="w-full mb-4 lg:mb-0">
-          <div className="flex lg:flex-row flex-col">
-            <div className="w-full lg:w-1/4 md:w-1/4 sm:w-2/12">
-              {teams.red && (
-                <TeamBoard
-                  players={teams.red.players}
-                  teamColor="red"
-                  teamScore={teams.red.score}
-                />
-              )}
-              {teams.blue && (
-                <TeamBoard
-                  players={teams.blue.players}
-                  teamColor="blue"
-                  teamScore={teams.blue.score}
-                />
-              )}
-              {currClue && (
-                <DisplayClue
-                  clue={currClue.clue}
-                  numGuesses={currClue.numGuesses}
-                />
-              )}
-            </div>
-            <div className="w-full lg:w-3/4 md:w-3/4 sm:w-10/12">
-              {cards && (
-                <CardList
-                  cards={cards}
-                  currTeam={currTeam}
-                  guesses={guesses}
-                  player={player}
-                />
-              )}
-              {player.role === "spymaster" &&
-                cards &&
-                currTeam === player.team && <ProvideClue emitClue={emitClue} />}
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-4">
+        <div className="md:col-span-2 p-4">
+          <div className="flex h-1/2 items-center justify-center flex-col">
+            {teams.red && (
+              <TeamBoard
+                players={teams.red.players}
+                teamColor="red"
+                teamScore={teams.red.score}
+              />
+            )}
+            {currClue && (
+              <DisplayClue
+                clue={currClue.clue}
+                numGuesses={currClue.numGuesses}
+              />
+            )}
+          </div>
+        </div>
+        <div className="md:col-span-6 p-4">
+          {player.role === "spymaster" && cards && currTeam === player.team && (
+            <ProvideClue emitClue={emitClue} />
+          )}
+          {cards && (
+            <CardList
+              cards={cards}
+              currTeam={currTeam}
+              guesses={guesses}
+              player={player}
+            />
+          )}
+        </div>
+        <div className="md:col-span-2 p-4">
+          <div className="flex h-1/2 items-center justify-center">
+            {teams.blue && (
+              <TeamBoard
+                players={teams.blue.players}
+                teamColor="blue"
+                teamScore={teams.blue.score}
+              />
+            )}
           </div>
         </div>
       </div>
