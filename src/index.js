@@ -13,7 +13,7 @@ ReactDOM.render(
   <SocketProvider socket={socket}>
     <CardProvider>
       <div
-        className="bg-cover bg-center fixed inset-0"
+        className="bg-cover bg-center inset-0 min-h-screen"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <App />
